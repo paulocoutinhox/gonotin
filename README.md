@@ -1,4 +1,4 @@
-# gonotin
+# gonotin (Go not in)
 
 This simple scripts compare file A and file B and shows line that NOT IN inside file B.
 
@@ -23,6 +23,12 @@ or
 
 > go build  
 > gonotin fileA.csv fileB.csv > result.txt
+
+To execute sample file generator you can use:
+
+> go run generator.go fileA.csv 100000 120000
+
+* [filename] [quantity of rows] [max random number]
 
 
 Thanks.
