@@ -8,7 +8,8 @@ import (
 )
 
 func main() {
-	var mode = 2
+	// select mode: '1' using array and sort or '2' to use map strategy (mode 2 is too fast)
+	var mode = 1
 
 	if mode == 1 {
 
