@@ -42,7 +42,7 @@ func main() {
 	}
 
 	// debug
-	fmt.Println("Data in A: ", len(dataA), " | Data in B: ", len(dataB))
+	fmt.Println("> Data in A: ", len(dataA), " | Data in B: ", len(dataB))
 
 	// process and show data from A that not exists in B
 	for _, valueA := range dataA {
