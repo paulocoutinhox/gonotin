@@ -46,10 +46,13 @@ func main() {
 	fmt.Println("> Data in A: ", len(dataA), " | Data in B: ", len(dataB))
 
 	// process and show data from A that not exists in B
+	total := len(dataB)
+	sort.Strings(dataB)
+	
 	for _, valueA := range dataA {
 		pos := sort.SearchStrings(dataB, valueA)
 
-		if pos < 0 {
+		if !(pos < total && dataB[pos] == valueA) {
 			fmt.Println(valueA)
 		}
 	}
