@@ -26,9 +26,9 @@ or
 
 To execute sample file generator you can use:
 
-    go run generator.go fileA.csv 100000 120000
+    go run generate.go fileA.csv 100000 120000
 
-> Syntax: [filename] [quantity of rows] [max random number]
+> Syntax: go run generate.go [filename] [quantity of rows] [max random number]
 
 
 Thanks.
