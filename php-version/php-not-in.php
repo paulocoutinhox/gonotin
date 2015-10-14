@@ -37,8 +37,8 @@ function debug($msg)
 	echo("$msg\n");
 }
 
-// logic (1, 2, 3 or 4 for difference performance)
-$mode = 1;
+// logic (1, 2, 3 or 4 for difference performance [better is 3 and 4])
+$mode = 4;
 
 if ($mode == 1)
 {

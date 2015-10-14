@@ -4,12 +4,13 @@ import (
 	"log"
 	"bufio"
 	"fmt"
+	"sort"
 )
 
 func main() {
 	// general data
-	dataA := map[string]string{}
-	dataB := map[string]string{}
+	var dataA []string
+	var dataB []string
 
 	// read file A
 	fileA, errA := os.Open(os.Args[1])
@@ -23,7 +24,7 @@ func main() {
 	scannerA := bufio.NewScanner(fileA)
 
 	for scannerA.Scan() {
-		dataA[scannerA.Text()] = scannerA.Text()
+		dataA = append(dataA, scannerA.Text())
 	}
 
 	// read file B
@@ -38,7 +39,7 @@ func main() {
 	scannerB := bufio.NewScanner(fileB)
 
 	for scannerB.Scan() {
-		dataB[scannerB.Text()] = scannerB.Text()
+		dataB = append(dataB, scannerB.Text())
 	}
 
 	// debug
@@ -46,9 +47,9 @@ func main() {
 
 	// process and show data from A that not exists in B
 	for _, valueA := range dataA {
-		_, ok := dataB[valueA];
+		pos := sort.SearchStrings(dataB, valueA)
 
-		if (!ok) {
+		if pos < 0 {
 			fmt.Println(valueA)
 		}
 	}
