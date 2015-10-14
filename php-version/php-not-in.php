@@ -37,7 +37,7 @@ function debug($msg)
 	echo("$msg\n");
 }
 
-// logic (1 or 2 for difference performance)
+// logic (1, 2, 3 or 4 for difference performance)
 $mode = 1;
 
 if ($mode == 1)
@@ -69,4 +69,24 @@ else if ($mode == 2)
 		    debug($dataAItem);
 	    }
 	}
+}
+else if ($mode == 3)
+{
+    foreach ($dataA as $dataAItem)
+    {
+        if (!isset($dataAItem[$dataB]))
+        {
+            debug($dataAItem);
+        }
+    }
+}
+else if ($mode == 4)
+{
+    foreach ($dataA as $dataAItem)
+    {
+        if (!array_key_exists($dataAItem, $dataB))
+        {
+            debug($dataAItem);
+        }
+    }
 }
