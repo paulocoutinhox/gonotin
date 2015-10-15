@@ -49,11 +49,22 @@ You can run the same logic in Python. To do it you need:
 
 * Thanks Gustavo Henrique 
 
+# NodeJS Version 
+
+You can run the same logic in Javascript using Node. To do it you need:
+
+    cd nodejs-version
+    [generate two files, fileA and fileB, for example]
+    node gonotion.js fileA.txt fileB.txt
+
+* Thanks Gustavo Henrique 
+
 # Benchmark using time tool from linux/osx, two files with 1.000.000 of rows using the generator
 
 1. Go     : 0m3.034s (mode 2)
 2. PHP    : 0m5.971s (mode 4)
-3. Python : 0m2.368s (default)
+3. Python : 0m2.368s (default) - WIN
+4. NodeJS : 0m2.487s (default)
 
 # Author WebSite
 
