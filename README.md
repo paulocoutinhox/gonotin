@@ -49,6 +49,12 @@ You can run the same logic in Python. To do it you need:
 
 * Thanks Gustavo Henrique 
 
+# Benchmark using time tool from linux/osx
+
+1. Go     : 0m3.034s (mode 2)
+2. PHP    : 0m5.971s (mode 4)
+3. Python : 0m2.368s (default)
+
 # Author WebSite
 
 > http://www.pcoutinho.com
