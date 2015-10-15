@@ -61,9 +61,9 @@ You can run the same logic in Javascript using Node. To do it you need:
 
 # Benchmark using time tool from linux/osx, two files with 1.000.000 of rows using the generator
 
-1. Go     : 0m2.884s (mode 4)
+1. Go     : 0m2.165s (mode 5) - WIN - Thanks for Justin from go-nuts
 2. PHP    : 0m5.971s (mode 4)
-3. Python : 0m2.368s (default) - WIN
+3. Python : 0m2.368s (default)
 4. NodeJS : 0m2.487s (default)
 5. C++    : 0m9.911s (mode 2)
 
