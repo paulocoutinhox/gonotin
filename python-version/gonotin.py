@@ -22,7 +22,7 @@ def add_line_to_set(file):
     with open(file, 'r') as f:
         return {line for line in f}
 
-# mode2 if from Justin - go-nuts group
+# mode2 is from Justin - go-nuts group
 def mode2():
     data_b = add_line_to_set(sys.argv[2])
     i = 0
@@ -34,6 +34,15 @@ def mode2():
     sys.stdout.flush()
     print '> Data in A: %s | Data in B: %s' % (i, len(data_b))
 
+# mode3 is from Manlio - go-nuts group
+def mode3():
+    data_a = set(open(sys.argv[1], 'r'))
+    data_b = set(open(sys.argv[2], 'r'))
+
+    print '> Data in A: %s | Data in B: %s' % (len(data_b), len(data_b))
+
+    for line in data_a - data_b:
+        sys.stdout.write(line)
 
 if __name__ == '__main__':
     '''
@@ -42,6 +51,7 @@ if __name__ == '__main__':
 
     modes = {
         '1': mode1,
-        '2': mode2
+        '2': mode2,
+        '3': mode3
     }
     modes.get(os.getenv('MODE', '1'))()
