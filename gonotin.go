@@ -5,11 +5,61 @@ import (
 	"bufio"
 	"fmt"
 	"sort"
+	"io"
 )
 
+func readMap(filename string) map[string]bool {
+	f, err := os.Open(filename)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer f.Close()
+	r := bufio.NewReader(f)
+	m := make(map[string]bool)
+	for {
+		b, _, err := r.ReadLine()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			log.Fatal(err)
+		}
+		m[string(b)] = true
+	}
+	return m
+}
+
+func readMap2(filename string) map[string]struct{} {
+	f, err := os.Open(filename)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer f.Close()
+	r := bufio.NewReader(f)
+	m := make(map[string]struct{})
+	empty := struct{}{}
+	for {
+		b, _, err := r.ReadLine()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			log.Fatal(err)
+		}
+		m[string(b)] = empty
+	}
+	return m
+}
+
 func main() {
-	// select mode: '1' using array and sort, '2' to use map strategy (mode 2 is too fast) and 3 that is a poor impl.
-	var mode = 2
+	// select mode:
+	// '1' - using array and sort
+	// '2' - to use map strategy (mode 2 is too fast)
+	// '3' - that is a poorimpl.
+	// '4' - Uli Kunitz version from go-nuts
+	// '5' - Justin version from go-nuts
+
+	var mode = 5
 
 	if mode == 1 {
 
@@ -165,6 +215,58 @@ func main() {
 				fmt.Println(keyA)
 			}
 		}
+
+	} else if mode == 4 {
+
+		// read files
+		mapB := readMap(os.Args[2])
+		f, err := os.Open(os.Args[1])
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		defer f.Close()
+
+		// debug
+		fmt.Println("> Data in B: ", len(mapB))
+
+		// process and show data from A that not exists in B
+		r := bufio.NewReader(f)
+		for {
+			b, _, err := r.ReadLine()
+			if err == io.EOF {
+				break
+			}
+			if err != nil {
+				log.Fatal(err)
+			}
+			l := string(b)
+			if _, ok := mapB[l]; !ok {
+				fmt.Println(l)
+			}
+		}
+
+	} else if mode == 5 {
+
+		// read files
+		mapA := readMap(os.Args[1])
+		mapB := readMap(os.Args[2])
+
+		w := bufio.NewWriter(os.Stdout)
+
+		// debug
+		fmt.Println("> Data in A: ", len(mapA), " | Data in B: ", len(mapB))
+
+		// process and show data from A that not exists in B
+		for item := range mapA {
+			if _, ok := mapB[item]; !ok {
+				w.WriteString(item)
+				w.WriteByte('\n')
+			}
+		}
+
+		w.Flush()
 
 	}
 }
