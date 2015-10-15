@@ -1,5 +1,7 @@
 .DS_Store
 *.txt
+!CMakeLists.txt
+*.user
 *.iml
 gonotin
 *.idea
