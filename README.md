@@ -1,4 +1,4 @@
-# gonotin (Go not in)
+# gonotin (Go Not In)
 
 This simple scripts compare file A and file B and shows line that NOT IN inside file B.
 
@@ -31,6 +31,21 @@ To execute sample file generator you can use:
 
 > Syntax: go run generate.go [filename] [quantity of rows] [max random number]
 
+# PHP Version 
+
+You can run the same logic in PHP. To do it you need:
+
+    cd php-version
+    [generate two files, fileA and fileB, for example]
+    php gonotion.php fileA.txt fileB.txt
+
+# Python Version 
+
+You can run the same logic in Python. To do it you need:
+
+    cd python-version
+    [generate two files, fileA and fileB, for example]
+    python gonotion.python fileA.txt fileB.txt
 
 # Author WebSite
 
