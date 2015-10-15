@@ -110,7 +110,7 @@ func main() {
 	// '5' - Justin version from go-nuts
 	// '6' - Matt version from go-nuts
 
-	var mode = 6
+	var mode = 5
 
 	if mode == 1 {
 
@@ -301,8 +301,8 @@ func main() {
 	} else if mode == 5 {
 
 		// read files
-		mapA := readMap(os.Args[1])
-		mapB := readMap(os.Args[2])
+		mapA := readMap2(os.Args[1])
+		mapB := readMap2(os.Args[2])
 
 		w := bufio.NewWriter(os.Stdout)
 
