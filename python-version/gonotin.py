@@ -8,7 +8,7 @@ def add_line_to_array(file):
         array = [line for line in f]
     return set(array)
 
-# mode1 is from Gustavo
+# mode1a is from Gustavo
 def mode1():
     data_a = add_line_to_array(sys.argv[1])
     data_b = add_line_to_array(sys.argv[2])
