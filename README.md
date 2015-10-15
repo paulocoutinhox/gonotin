@@ -9,7 +9,7 @@ To execute the golang version:
 or for performance:
 
     go build gonotin.go
-    gonotin fileA.txt fileB.txt
+    ./gonotin fileA.txt fileB.txt
 
 To execute the php version:
 
@@ -22,7 +22,7 @@ You can execute and send the output to a file, example:
 or
 
     go build gonotin.go
-    gonotin fileA.txt fileB.txt > result.txt
+    ./gonotin fileA.txt fileB.txt > result.txt
 
 To execute sample file generator you can use:
 
