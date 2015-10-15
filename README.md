@@ -45,7 +45,9 @@ You can run the same logic in Python. To do it you need:
 
     cd python-version
     [generate two files, fileA and fileB, for example]
-    python gonotion.python fileA.txt fileB.txt
+    python gonotion.py fileA.txt fileB.txt
+
+* Thanks Gustavo Henrique 
 
 # Author WebSite
 
