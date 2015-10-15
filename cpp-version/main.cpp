@@ -8,7 +8,7 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    // select mode (1 = slow using std::vector, 2 = using map)
+    // select mode (1 = slow using std::vector, 2 = using set)
     int mode = 2;
 
     if (mode == 1)
