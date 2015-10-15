@@ -61,7 +61,7 @@ You can run the same logic in Javascript using Node. To do it you need:
 
 # Benchmark using time tool from linux/osx, two files with 1.000.000 of rows using the generator
 
-1. Go     : 0m2.165s (mode 5) - WIN - Thanks for Justin from go-nuts
+1. Go     : 0m1.927s (mode 6) - WIN - Thanks for Matt from go-nuts
 2. PHP    : 0m5.971s (mode 4)
 3. Python : 0m2.368s (mode 1) - Thanks for Gustavo Henrique
 4. NodeJS : 0m2.487s (default)
