@@ -65,6 +65,7 @@ You can run the same logic in Javascript using Node. To do it you need:
 2. PHP    : 0m5.971s (mode 4)
 3. Python : 0m2.368s (default) - WIN
 4. NodeJS : 0m2.487s (default)
+5. C++    : 0m9.911s (mode 2)
 
 # Author WebSite
 
