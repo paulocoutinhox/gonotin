@@ -8,7 +8,7 @@ def add_line_to_array(file):
         array = [line for line in f]
     return set(array)
 
-
+# mode1 is from Gustavo
 def mode1():
     data_a = add_line_to_array(sys.argv[1])
     data_b = add_line_to_array(sys.argv[2])
@@ -44,6 +44,15 @@ def mode3():
     for line in data_a - data_b:
         sys.stdout.write(line)
 
+# mode4 is from Gustavo
+def mode4():
+    data_a = add_line_to_set(sys.argv[1])
+    data_b = add_line_to_set(sys.argv[2])
+    print '> Data in A: %s | Data in B: %s' % (len(data_a), len(data_b))
+    diff = set.difference(data_a, data_b)
+    for line in diff:
+        print line.rstrip()
+
 if __name__ == '__main__':
     '''
     Usage: MODE=1 time python gonotin.py file1.txt file2.txt
@@ -52,6 +61,7 @@ if __name__ == '__main__':
     modes = {
         '1': mode1,
         '2': mode2,
-        '3': mode3
+        '3': mode3,
+        '4': mode4
     }
     modes.get(os.getenv('MODE', '1'))()
