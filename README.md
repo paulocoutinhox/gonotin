@@ -6,7 +6,7 @@ To execute the golang version:
 
     go run gonotin.go fileA.txt fileB.txt
 
-or for performance:
+or for better performance:
 
     go build gonotin.go
     ./gonotin fileA.txt fileB.txt
@@ -19,7 +19,7 @@ You can execute and send the output to a file, example:
 
     go run gonotin.go fileA.txt fileB.txt > result.txt
 
-or
+or for better performance:
 
     go build gonotin.go
     ./gonotin fileA.txt fileB.txt > result.txt
