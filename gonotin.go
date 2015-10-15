@@ -8,6 +8,8 @@ import (
 	"io"
 )
 
+// Uli functions
+
 func readMap(filename string) map[string]bool {
 	f, err := os.Open(filename)
 	if err != nil {
@@ -29,6 +31,7 @@ func readMap(filename string) map[string]bool {
 	return m
 }
 
+// Justin functions
 func readMap2(filename string) map[string]struct{} {
 	f, err := os.Open(filename)
 	if err != nil {
@@ -51,15 +54,63 @@ func readMap2(filename string) map[string]struct{} {
 	return m
 }
 
+// Matt functions
+func setError(errp *error, errf func() error) {
+	if *errp == nil {
+		*errp = errf()
+	}
+}
+
+func filter(w io.Writer, r io.Reader, seen map[string]struct{}) (err error) {
+	bw := bufio.NewWriter(w)
+	defer setError(&err, bw.Flush)
+	s := bufio.NewScanner(r)
+	defer setError(&err, s.Err)
+	for s.Scan() {
+		if _, ok := seen[string(s.Bytes())]; !ok {
+			bw.Write(s.Bytes())
+			bw.WriteByte('\n')
+		}
+	}
+	return nil
+}
+
+func load(r io.Reader, seen map[string]struct{}) (err error) {
+	empty := struct{}{}
+	s := bufio.NewScanner(r)
+	defer setError(&err, s.Err)
+	for s.Scan() {
+		seen[string(s.Bytes())] = empty
+	}
+	return nil
+}
+
+func check(err error) {
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func mustOpen(filename string) *os.File {
+	if f, err := os.Open(filename); err != nil {
+		log.Fatal(err)
+		panic("notreached")
+	} else {
+		return f
+	}
+}
+
+// Main
 func main() {
 	// select mode:
 	// '1' - using array and sort
-	// '2' - to use map strategy (mode 2 is too fast)
+	// '2' - to use map strategy
 	// '3' - that is a poorimpl.
 	// '4' - Uli Kunitz version from go-nuts
 	// '5' - Justin version from go-nuts
+	// '6' - Matt version from go-nuts
 
-	var mode = 5
+	var mode = 6
 
 	if mode == 1 {
 
@@ -267,6 +318,21 @@ func main() {
 		}
 
 		w.Flush()
+
+	} else if mode == 6 {
+
+		// read files
+		seen := make(map[string]struct{})
+		func() {
+			r := mustOpen(os.Args[1])
+			defer r.Close()
+			check(load(r, seen))
+		}()
+		func() {
+			r := mustOpen(os.Args[2])
+			defer r.Close()
+			check(filter(os.Stdout, r, seen))
+		}()
 
 	}
 }
