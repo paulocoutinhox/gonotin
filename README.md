@@ -31,4 +31,10 @@ To execute sample file generator you can use:
 > Syntax: go run generate.go [filename] [quantity of rows] [max random number]
 
 
-Thanks.
+# Author WebSite
+
+> http://www.pcoutinho.com
+
+# License
+
+MIT
