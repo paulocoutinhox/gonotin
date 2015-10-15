@@ -49,7 +49,7 @@ You can run the same logic in Python. To do it you need:
 
 * Thanks Gustavo Henrique 
 
-# Benchmark using time tool from linux/osx
+# Benchmark using time tool from linux/osx, two files with 1.000.000 of rows using the generator
 
 1. Go     : 0m3.034s (mode 2)
 2. PHP    : 0m5.971s (mode 4)
