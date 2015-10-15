@@ -110,5 +110,61 @@ func main() {
 			}
 		}
 
+	} else if mode == 3 {
+
+		// general data
+		var dataA = make(map[string]int)
+		var dataB = make(map[string]int)
+
+		// read file A
+		fileA, errA := os.Open(os.Args[1])
+
+		if errA != nil {
+			log.Fatal(errA)
+		}
+
+		defer fileA.Close()
+
+		readerA := bufio.NewReader(fileA)
+
+		for {
+			line, _, err := readerA.ReadLine()
+			if err != nil {
+				break
+			}
+			dataA[string(line)] = 0
+		}
+
+		// read file B
+		fileB, errB := os.Open(os.Args[2])
+
+		if errB != nil {
+			log.Fatal(errB)
+		}
+
+		defer fileB.Close()
+
+		readerB := bufio.NewReader(fileB)
+
+		for {
+			line, _, err := readerB.ReadLine()
+			if err != nil {
+				break
+			}
+			dataA[string(line)] = 0
+		}
+
+		// debug
+		fmt.Println("> Data in A: ", len(dataA), " | Data in B: ", len(dataB))
+
+		// process and show data from A that not exists in B
+		for keyA, _ := range dataA {
+			_, exists := dataB[keyA]
+
+			if !exists {
+				fmt.Println(keyA)
+			}
+		}
+
 	}
 }
