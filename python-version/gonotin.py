@@ -22,7 +22,7 @@ def add_line_to_set(file):
     with open(file, 'r') as f:
         return {line for line in f}
 
-
+# mode2 if from Justin - go-nuts group
 def mode2():
     data_b = add_line_to_set(sys.argv[2])
     i = 0
