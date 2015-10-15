@@ -27,6 +27,7 @@ or for better performance:
 To execute sample file generator you can use:
 
     go run generate.go fileA.txt 100000 120000
+    go run generate.go fileB.txt 100000 120000
 
 > Syntax: go run generate.go [filename] [quantity of rows] [max random number]
 
