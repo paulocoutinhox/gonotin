@@ -21,7 +21,6 @@ rm -rf cpp-version/build
 cmake -Bcpp-version/build/ -Hcpp-version/
 make -C cpp-version/build/
 mv cpp-version/build/gonotin cpp-version/
-
 rm -rf cpp-version/build
 echo ""
 

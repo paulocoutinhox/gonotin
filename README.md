@@ -46,6 +46,36 @@ MODE=1 python python-version/gonotin.py data/fileA-large.txt data/fileB-large.tx
 node nodejs-version/gonotin.js data/fileA-large.txt data/fileB-large.txt 1
 ```
 
+# Running C++ version
+
+    Buiding:
+```
+cmake -Bcpp-version/build/ -Hcpp-version/
+make -C cpp-version/build/
+mv cpp-version/build/gonotin cpp-version/
+rm -rf cpp-version/build
+```
+
+    Syntax: ./cpp-version/gonotin [file A] [file B] [mode] 
+
+```
+./cpp-version/gonotin data/fileA-large.txt data/fileB-large.txt 1
+```
+
+# Running options
+
+    Time: You can use "time" unix/osx tool to get the executing time before the command. Every command on benchmark use it.
+    
+```
+time go run go-version/gonotin.go data/fileA-large.txt data/fileB-large.txt 1
+```
+
+    Results: You can send results to a file. Every command on benchmark use it.
+
+```
+time go run go-version/gonotin.go data/fileA-large.txt data/fileB-large.txt 1 > results.txt
+```
+
 # Running the sample file generator
 
     Syntax: go run generator/generator.go [filename] [quantity of rows] [max random number]
