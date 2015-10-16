@@ -10,13 +10,12 @@ import (
 )
 
 func random(min, max int) int {
-	//rand.Seed(time.Now().Unix())
-	rand.Seed(int64(time.Now().Nanosecond()))
 	return rand.Intn(max - min) + min
 }
 
 func main() {
 	// general data
+	rand.Seed(int64(time.Now().Nanosecond()))
 	filename := os.Args[1]
 
 	totalNumbersArg, _ := strconv.ParseInt(os.Args[2], 10, 0)
