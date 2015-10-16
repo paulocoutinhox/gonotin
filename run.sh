@@ -2,6 +2,27 @@
 
 ################################################################################
 
+# functions
+startTimer() {
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        start=$(gdate +%s.%N)
+    else
+        start=$(date +%s.%N)
+    fi
+}
+
+endTimer() {
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        dur=$(echo "$(gdate +%s.%N) - $start" | bc);
+    else
+        dur=$(echo "$(date +%s.%N) - $start" | bc);
+    fi
+
+    printf "\n> Execution time: %.6f seconds\n" $dur
+}
+
+################################################################################
+
 echo "> Compiling Go file..."
 rm -rf go-version/gonotin
 go build -o go-version/gonotin go-version/gonotin.go
@@ -48,7 +69,9 @@ echo ""
 
 for i in `seq 1 1`; do
     echo "> Executing C++ (mode = $i, size = $SIZE) version..."
-    time cpp-version/$EXECUTABLE $FILE_A $FILE_B > results/cpp-$SIZE-mode-$i$SUFFIX
+    startTimer
+    cpp-version/$EXECUTABLE $FILE_A $FILE_B > results/cpp-$SIZE-mode-$i$SUFFIX
+    endTimer
     echo ""
 done
 
@@ -56,7 +79,9 @@ done
 
 for i in `seq 1 7`; do
     echo "> Executing Go (mode = $i, size = $SIZE) version..."
-    time go-version/$EXECUTABLE $FILE_A $FILE_B $i > results/go-$SIZE-mode-$i$SUFFIX
+    startTimer
+    go-version/$EXECUTABLE $FILE_A $FILE_B $i > results/go-$SIZE-mode-$i$SUFFIX
+    endTimer
     echo ""
 done
 
@@ -65,7 +90,9 @@ done
 
 for i in `seq 1 4`; do
     echo "> Executing Python (mode = $i, size = $SIZE) version..."
-    MODE=$i time python python-version/$EXECUTABLE.py $FILE_A $FILE_B > results/python-$SIZE-mode-$i$SUFFIX
+    startTimer
+    MODE=$i python python-version/$EXECUTABLE.py $FILE_A $FILE_B > results/python-$SIZE-mode-$i$SUFFIX
+    endTimer
     echo ""
 done
 
@@ -73,7 +100,9 @@ done
 
 for i in `seq 1 2`; do
     echo "> Executing PHP (mode = $i, size = $SIZE) version..."
-    time php php-version/$EXECUTABLE.php $FILE_A $FILE_B $i > results/php-$SIZE-mode-$i$SUFFIX
+    startTimer
+    php php-version/$EXECUTABLE.php $FILE_A $FILE_B $i > results/php-$SIZE-mode-$i$SUFFIX
+    endTimer
     echo ""
 done
 
@@ -81,7 +110,9 @@ done
 
 for i in `seq 1 1`; do
     echo "> Executing Node (mode = $i, size = $SIZE) version..."
-    time node nodejs-version/$EXECUTABLE.js $FILE_A $FILE_B > results/nodejs-$SIZE-mode-$i$SUFFIX
+    startTimer
+    node nodejs-version/$EXECUTABLE.js $FILE_A $FILE_B > results/nodejs-$SIZE-mode-$i$SUFFIX
+    endTimer
     echo ""
 done
 
