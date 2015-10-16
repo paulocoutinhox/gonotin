@@ -67,10 +67,10 @@ echo ""
 
 ################################################################################
 
-for i in `seq 1 1`; do
+for i in `seq 1 4`; do
     echo "> Executing C++ (mode = $i, size = $SIZE) version..."
     startTimer
-    cpp-version/$EXECUTABLE $FILE_A $FILE_B > results/cpp-$SIZE-mode-$i$SUFFIX
+    cpp-version/$EXECUTABLE $FILE_A $FILE_B $i > results/cpp-$SIZE-mode-$i$SUFFIX
     endTimer
     echo ""
 done
