@@ -146,6 +146,9 @@ void mode3(char *argv[])
 
 void mode4(char *argv[])
 {
+    cout << "it is generating wrong results\n";
+    return;
+
     // version from: Rajanikanth
 
     // general
