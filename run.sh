@@ -54,7 +54,7 @@ done
 
 ################################################################################
 
-for i in `seq 1 6`; do
+for i in `seq 1 7`; do
     echo "> Executing Go (mode = $i, size = $SIZE) version..."
     time go-version/$EXECUTABLE $FILE_A $FILE_B $i > results/go-$SIZE-mode-$i$SUFFIX
     echo ""
