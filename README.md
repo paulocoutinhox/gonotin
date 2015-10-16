@@ -102,8 +102,11 @@ go run go-generator/generator.go data/fileB.txt 100000 120000
 
 # Running on OSX
 
-    If you plan run the run.sh script on OSX, please install coreutils to get the gdate command because the BSD date command remove the nanoseconds precision:
-    brew install coreutils
+    If you plan execute the "run.sh" script on OSX, please install "coreutils" to get the "gdate" command because the "BSD" "date" command remove the "nanoseconds" precision:
+
+```
+brew install coreutils
+```
 
 # Benchmark results
 
