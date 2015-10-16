@@ -4,7 +4,12 @@ This simple scripts compare file A and file B and shows line that not exists in 
 
 # Automated running
 
-    ./run.sh
+    SYNTAX: 
+    ./run.sh [file size - small, medium or large]
+
+```
+./run.sh large
+```
 
 # Running Go version 
 
