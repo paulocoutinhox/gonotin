@@ -77,7 +77,7 @@ rm -rf cpp-version/build
 # Running options
 
     TIME: 
-    You can use "time" unix/osx tool to get the executing time before the command. Every command on benchmark use it.
+    You can use "time" unix/osx tool to get the executing time before the command. Every command on benchmark use own time calculation.
     
 ```
 time go run go-version/gonotin.go data/fileA-large.txt data/fileB-large.txt 1
@@ -99,6 +99,11 @@ time go run go-version/gonotin.go data/fileA-large.txt data/fileB-large.txt 1 > 
 go run go-generator/generator.go data/fileA.txt 100000 120000
 go run go-generator/generator.go data/fileB.txt 100000 120000
 ```
+
+# Running on OSX
+
+    If you plan run the run.sh script on OSX, please install coreutils to get the gdate command because the BSD date command remove the nanoseconds precision:
+    brew install coreutils
 
 # Benchmark results
 
