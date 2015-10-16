@@ -57,7 +57,9 @@ mv cpp-version/build/gonotin cpp-version/
 rm -rf cpp-version/build
 ```
 
+
     SYNTAX: ./cpp-version/gonotin [file A] [file B] [mode] 
+
 
 ```
 ./cpp-version/gonotin data/fileA-large.txt data/fileB-large.txt 1
