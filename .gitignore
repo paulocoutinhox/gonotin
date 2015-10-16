@@ -1,7 +1,13 @@
 .DS_Store
-*.txt
-!CMakeLists.txt
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
 *.user
 *.iml
-gonotin
 *.idea
+go-generator/generator
+go-version/gonotin
+cpp-version/gonotin.dSYM
+cpp-version/build
+results/

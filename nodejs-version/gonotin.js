@@ -1,3 +1,7 @@
+// it is generating a wrong result
+console.log("it is generating wrong results");
+return
+
 var fs = require('fs');
 
 function listFileContentSync (fileName) {
@@ -9,8 +13,6 @@ function listFileContentSync (fileName) {
 
 var dataA = listFileContentSync(process.argv[2]);
 var dataB = listFileContentSync(process.argv[3]);
-
-console.log('> Data in A: ' + dataA.length + ' | Data in B: ' + dataB.length);
 
 for (var i = 0; i < dataA.length; i++) {
     var value = dataA[i];

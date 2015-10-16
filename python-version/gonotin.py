@@ -12,7 +12,6 @@ def add_line_to_array(file):
 def mode1():
     data_a = add_line_to_array(sys.argv[1])
     data_b = add_line_to_array(sys.argv[2])
-    print '> Data in A: %s | Data in B: %s' % (len(data_a), len(data_b))
     for value in data_a:
         if not value in data_b:
             print value.rstrip()
@@ -24,6 +23,10 @@ def add_line_to_set(file):
 
 # mode2 is from Justin - go-nuts group
 def mode2():
+    # it is generating wrong results
+	print "it is generating wrong results"
+
+	'''
     data_b = add_line_to_set(sys.argv[2])
     i = 0
     with open(sys.argv[1], 'r') as f:
@@ -32,14 +35,12 @@ def mode2():
                 i += 1
                 sys.stdout.write(value)
     sys.stdout.flush()
-    print '> Data in A: %s | Data in B: %s' % (i, len(data_b))
+    '''
 
 # mode3 is from Manlio - go-nuts group
 def mode3():
     data_a = set(open(sys.argv[1], 'r'))
     data_b = set(open(sys.argv[2], 'r'))
-
-    print '> Data in A: %s | Data in B: %s' % (len(data_b), len(data_b))
 
     for line in data_a - data_b:
         sys.stdout.write(line)
@@ -48,7 +49,6 @@ def mode3():
 def mode4():
     data_a = add_line_to_set(sys.argv[1])
     data_b = add_line_to_set(sys.argv[2])
-    print '> Data in A: %s | Data in B: %s' % (len(data_a), len(data_b))
     diff = set.difference(data_a, data_b)
     for line in diff:
         print line.rstrip()
