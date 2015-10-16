@@ -1,76 +1,68 @@
 # gonotin (Go Not In)
 
-This simple scripts compare file A and file B and shows line that NOT IN inside file B.
+This simple scripts compare file A and file B and shows line that not exists in file B, but exists in file A.
 
-To execute the golang version:
+# Automated running
 
-    go run gonotin.go fileA.txt fileB.txt
+    ./run.sh
 
-or for better performance:
+# Running Go version 
 
-    go build gonotin.go
-    ./gonotin fileA.txt fileB.txt
+    Syntax: go run go-version/gonotin.go [file A] [file B] [mode]  
 
-To execute the php version:
+```
+go run go-version/gonotin.go data/fileA-large.txt data/fileB-large.txt 1
+```
 
-    php php-not-in.php fileA.txt fileB.txt
-
-You can execute and send the output to a file, example:
-
-    go run gonotin.go fileA.txt fileB.txt > result.txt
 
 or for better performance:
 
-    go build gonotin.go
-    ./gonotin fileA.txt fileB.txt > result.txt
+```
+go build -o go-version/gonotin go-version/gonotin.go
+./go-version/gonotin data/fileA-large.txt data/fileB-large.txt 1
+```    
 
-To execute sample file generator you can use:
+# Running PHP version 
 
-    go run generate.go fileA.txt 100000 120000
-    go run generate.go fileB.txt 100000 120000
+    Syntax: php php-version/gonotin.php [file A] [file B] [mode] 
 
-> Syntax: go run generate.go [filename] [quantity of rows] [max random number]
+```
+php php-version/gonotin.php data/fileA-large.txt data/fileB-large.txt 1
+```
 
-# PHP Version 
+# Running Python version
 
-You can run the same logic in PHP. To do it you need:
+    Syntax: MODE=[mode] python python-version/gonotin.py [file A] [file B] 
 
-    cd php-version
-    [generate two files, fileA and fileB, for example]
-    php gonotion.php fileA.txt fileB.txt
+```
+MODE=1 python python-version/gonotin.py data/fileA-large.txt data/fileB-large.txt
+```
 
-# Python Version 
+# Running NodeJS version
 
-You can run the same logic in Python. To do it you need:
+    Syntax: node nodejs-version/gonotin.js [file A] [file B] [mode] 
 
-    cd python-version
-    [generate two files, fileA and fileB, for example]
-    MODE=1 python gonotion.py fileA.txt fileB.txt
+```
+node nodejs-version/gonotin.js data/fileA-large.txt data/fileB-large.txt 1
+```
 
-* Thanks Gustavo Henrique 
+# Running the sample file generator
 
-# NodeJS Version 
+    Syntax: go run generator/generator.go [filename] [quantity of rows] [max random number]
 
-You can run the same logic in Javascript using Node. To do it you need:
+```
+go run go-generator/generator.go data/fileA.txt 100000 120000
+go run go-generator/generator.go data/fileB.txt 100000 120000
+```
 
-    cd nodejs-version
-    [generate two files, fileA and fileB, for example]
-    node gonotion.js fileA.txt fileB.txt
+# Benchmark results
 
-* Thanks Gustavo Henrique 
-
-# Benchmark using time tool from linux/osx, two files with 1.000.000 of rows using the generator
-
-1. Go     : 0m1.927s (mode 6) - WIN - Thanks for Matt from go-nuts
-2. PHP    : 0m5.971s (mode 4)
-3. Python : 0m2.368s (mode 1) - Thanks for Gustavo Henrique
-4. NodeJS : 0m2.487s (default)
-5. C++    : 0m5.003s (mode 3) - Thanks for 0xe2.0x9a.0x9b from go-nuts
+Check file [RESULTS.md](RESULTS.md)
 
 # Author WebSite
 
-> http://www.pcoutinho.com
+    http://www.pcoutinho.com
 
 # License
 
-MIT
+    MIT

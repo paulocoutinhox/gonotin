@@ -1,3 +1,4 @@
+```
 > Processing large files...
 
 > Executing C++ (mode = 1, size = large) version...
@@ -28,3 +29,4 @@ sys	0m0.106s
         1.37 real         1.23 user         0.13 sys
 
 > Finished!
+```
