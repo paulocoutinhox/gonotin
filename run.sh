@@ -18,7 +18,7 @@ endTimer() {
         dur=$(echo "$(date +%s.%N) - $start" | bc);
     fi
 
-    printf "\n> Execution time: %.6f seconds\n" $dur
+    printf "> Execution time: %.6f seconds\n\n" $dur
 }
 
 ################################################################################
