@@ -7,10 +7,6 @@
 > Execution time: 3.466557 seconds
 
 
-> Executing C++ (mode = 4, size = large) version...
-> Execution time: 0.008991 seconds
-
-
 > Executing C++ (mode = 5, size = large) version...
 > Execution time: 2.255814 seconds
 
