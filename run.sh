@@ -35,8 +35,14 @@ checkGoInstalled() {
 }
 
 checkCppInstalled() {
-    if [ -x "$(command -v g++)" ]; then
-        CPP_INSTALLED=1
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        if [ -x "$(command -v clang++)" ]; then
+            CPP_INSTALLED=1
+        fi
+    else
+        if [ -x "$(command -v g++)" ]; then
+            CPP_INSTALLED=1
+        fi
     fi
 }
 
@@ -89,16 +95,21 @@ if [ $CPP_INSTALLED -eq 1 ]; then
     rm -rf cpp-version/build
 
     # OSX/*nix compiling method
-    g++ -g cpp-version/gonotin.cpp -o cpp-version/gonotin -lm -Wno-c++11-extensions
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        clang++ -g cpp-version/gonotin.cpp -o cpp-version/gonotin -lm -std=c++11
+    else
+        g++ -g -pthread cpp-version/gonotin.cpp -o cpp-version/gonotin -lm -std=c++11
+    fi
 
     # Cross-Platform compiling method
     #cmake -Bcpp-version/build/ -Hcpp-version/
     #make -C cpp-version/build/
     #mv cpp-version/build/gonotin cpp-version/
     #rm -rf cpp-version/build
+
     echo ""
 else
-    echo "> ERROR: G++ is not installed!"
+    echo "> ERROR: C++ is not installed!"
     echo ""
 fi
 
@@ -124,7 +135,7 @@ echo ""
 ################################################################################
 
 if [ $CPP_INSTALLED -eq 1 ]; then
-    for i in `seq 1 4`; do
+    for i in `seq 1 5`; do
         echo "> Executing C++ (mode = $i, size = $SIZE) version..."
         startTimer
         cpp-version/$EXECUTABLE $FILE_A $FILE_B $i > results/cpp-$SIZE-mode-$i$SUFFIX

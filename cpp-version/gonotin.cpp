@@ -4,6 +4,8 @@
 #include <algorithm>
 #include <set>
 #include <unordered_set>
+#include <thread>
+#include <future>
 
 using namespace std;
 
@@ -193,6 +195,48 @@ void mode4(char *argv[])
     }
 }
 
+std::unordered_set<string> mode5_reader(char *file)
+{
+    std::unordered_set<string> data;
+
+    ifstream stream;
+    stream.open(file);
+
+    while(!stream.eof())
+    {
+        string line;
+        stream >> line;
+        data.insert(line);
+    }
+
+    stream.close();
+    return data;
+}
+
+void mode5(char *argv[])
+{
+    // version from: Paulo Coutinho with threads
+
+    // generate future async
+    auto futureA = std::async(&mode5_reader, argv[1]);
+    auto futureB = std::async(mode5_reader, argv[2]);
+
+    // get data from future
+    std::unordered_set<string> dataA = futureA.get();
+    std::unordered_set<string> dataB = futureB.get();
+
+    // process data
+    for(string value : dataA)
+    {
+        auto search = dataB.find(value);
+
+        if (search == dataB.end())
+        {
+            printf("%s\n", value.c_str());
+        }
+    }
+}
+
 int main(int argc, char *argv[])
 {
     // select mode
@@ -200,6 +244,7 @@ int main(int argc, char *argv[])
     // 2 = using set
     // 3 = using std::unordered_set - thanks for 0xe2.0x9a.0x9b from go-nuts
     // 4 = using std::set_difference - thanks for Rajanikanth from go-nuts - it not show the correct data
+    // 5 = using thread - Paulo Coutinho
 
     int mode = atoi(argv[3]);
 
@@ -218,5 +263,9 @@ int main(int argc, char *argv[])
     else if (mode == 4)
     {
         mode4(argv);
+    }
+    else if (mode == 5)
+    {
+        mode5(argv);
     }
 }
