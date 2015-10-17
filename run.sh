@@ -2,6 +2,13 @@
 
 ################################################################################
 
+# variables
+GO_INSTALLED=0
+CPP_INSTALLED=0
+PYTHON_INSTALLED=0
+PHP_INSTALLED=0
+NODEJS_INSTALLED=0
+
 # functions
 startTimer() {
     if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -21,29 +28,79 @@ endTimer() {
     printf "> Execution time: %.6f seconds\n\n" $dur
 }
 
+checkGoInstalled() {
+    if [ -x "$(command -v go)" ]; then
+        GO_INSTALLED=1
+    fi
+}
+
+checkCppInstalled() {
+    if [ -x "$(command -v g++)" ]; then
+        CPP_INSTALLED=1
+    fi
+}
+
+checkPythonInstalled() {
+    if [ -x "$(command -v python)" ]; then
+        PYTHON_INSTALLED=1
+    fi
+}
+
+checkPhpInstalled() {
+    if [ -x "$(command -v php)" ]; then
+        PHP_INSTALLED=1
+    fi
+}
+
+checkNodeJsInstalled() {
+    if [ -x "$(command -v node)" ]; then
+        NODEJS_INSTALLED=1
+    fi
+}
+
 ################################################################################
 
-echo "> Compiling Go file..."
-rm -rf go-version/gonotin
-go build -o go-version/gonotin go-version/gonotin.go
-echo ""
+# check installed apps
+
+checkGoInstalled
+checkCppInstalled
+checkPythonInstalled
+checkPhpInstalled
+checkNodeJsInstalled
 
 ################################################################################
 
-echo "> Compiling C++ file..."
+if [ $GO_INSTALLED -eq 1 ]; then
+    echo "> Compiling Go file..."
+    rm -rf go-version/gonotin
+    go build -o go-version/gonotin go-version/gonotin.go
+    echo ""
+else
+    echo "> ERROR: Go is not installed!"
+    echo ""
+fi
 
-rm -rf cpp-version/gonotin
-rm -rf cpp-version/build
+################################################################################
 
-# OSX/*nix compiling method
-#g++ -g cpp-version/gonotin.cpp -o cpp-version/gonotin -lm
+if [ $CPP_INSTALLED -eq 1 ]; then
+    echo "> Compiling C++ file..."
 
-# Cross-Platform compiling method
-cmake -Bcpp-version/build/ -Hcpp-version/
-make -C cpp-version/build/
-mv cpp-version/build/gonotin cpp-version/
-rm -rf cpp-version/build
-echo ""
+    rm -rf cpp-version/gonotin
+    rm -rf cpp-version/build
+
+    # OSX/*nix compiling method
+    g++ -g cpp-version/gonotin.cpp -o cpp-version/gonotin -lm -Wno-c++11-extensions
+
+    # Cross-Platform compiling method
+    #cmake -Bcpp-version/build/ -Hcpp-version/
+    #make -C cpp-version/build/
+    #mv cpp-version/build/gonotin cpp-version/
+    #rm -rf cpp-version/build
+    echo ""
+else
+    echo "> ERROR: G++ is not installed!"
+    echo ""
+fi
 
 ################################################################################
 
@@ -54,8 +111,6 @@ echo ""
 
 ################################################################################
 
-echo "> Processing large files..."
-
 CWD=$(pwd)
 SIZE=$1
 FILE_A=$CWD/data/fileA-$SIZE.txt
@@ -63,60 +118,84 @@ FILE_B=$CWD/data/fileB-$SIZE.txt
 SUFFIX=.txt
 EXECUTABLE=gonotin
 
+echo "> Processing $SIZE files..."
 echo ""
 
 ################################################################################
 
-for i in `seq 1 4`; do
-    echo "> Executing C++ (mode = $i, size = $SIZE) version..."
-    startTimer
-    cpp-version/$EXECUTABLE $FILE_A $FILE_B $i > results/cpp-$SIZE-mode-$i$SUFFIX
-    endTimer
+if [ $CPP_INSTALLED -eq 1 ]; then
+    for i in `seq 1 4`; do
+        echo "> Executing C++ (mode = $i, size = $SIZE) version..."
+        startTimer
+        cpp-version/$EXECUTABLE $FILE_A $FILE_B $i > results/cpp-$SIZE-mode-$i$SUFFIX
+        endTimer
+        echo ""
+    done
+else
+    echo "> ERROR: G++ is not installed!"
     echo ""
-done
+fi
 
 ################################################################################
 
-for i in `seq 1 7`; do
-    echo "> Executing Go (mode = $i, size = $SIZE) version..."
-    startTimer
-    go-version/$EXECUTABLE $FILE_A $FILE_B $i > results/go-$SIZE-mode-$i$SUFFIX
-    endTimer
+if [ $GO_INSTALLED -eq 1 ]; then
+    for i in `seq 1 7`; do
+        echo "> Executing Go (mode = $i, size = $SIZE) version..."
+        startTimer
+        go-version/$EXECUTABLE $FILE_A $FILE_B $i > results/go-$SIZE-mode-$i$SUFFIX
+        endTimer
+        echo ""
+    done
+else
+    echo "> ERROR: Go is not installed!"
     echo ""
-done
-
+fi
 
 ################################################################################
 
-for i in `seq 1 4`; do
-    echo "> Executing Python (mode = $i, size = $SIZE) version..."
-    startTimer
-    MODE=$i python python-version/$EXECUTABLE.py $FILE_A $FILE_B > results/python-$SIZE-mode-$i$SUFFIX
-    endTimer
+if [ $PYTHON_INSTALLED -eq 1 ]; then
+    for i in `seq 1 4`; do
+        echo "> Executing Python (mode = $i, size = $SIZE) version..."
+        startTimer
+        MODE=$i python python-version/$EXECUTABLE.py $FILE_A $FILE_B > results/python-$SIZE-mode-$i$SUFFIX
+        endTimer
+        echo ""
+    done
+else
+    echo "> ERROR: Python is not installed!"
     echo ""
-done
+fi
 
 ################################################################################
 
-for i in `seq 1 2`; do
-    echo "> Executing PHP (mode = $i, size = $SIZE) version..."
-    startTimer
-    php php-version/$EXECUTABLE.php $FILE_A $FILE_B $i > results/php-$SIZE-mode-$i$SUFFIX
-    endTimer
+if [ $PHP_INSTALLED -eq 1 ]; then
+    for i in `seq 1 2`; do
+        echo "> Executing PHP (mode = $i, size = $SIZE) version..."
+        startTimer
+        php php-version/$EXECUTABLE.php $FILE_A $FILE_B $i > results/php-$SIZE-mode-$i$SUFFIX
+        endTimer
+        echo ""
+    done
+else
+    echo "> ERROR: Php is not installed!"
     echo ""
-done
+fi
 
 ################################################################################
 
-for i in `seq 1 1`; do
-    echo "> Executing Node (mode = $i, size = $SIZE) version..."
-    startTimer
-    node nodejs-version/$EXECUTABLE.js $FILE_A $FILE_B > results/nodejs-$SIZE-mode-$i$SUFFIX
-    endTimer
-    echo ""
-done
+if [ $NODEJS_INSTALLED -eq 1 ]; then
+    for i in `seq 1 1`; do
+        echo "> Executing Node (mode = $i, size = $SIZE) version..."
+        startTimer
+        node nodejs-version/$EXECUTABLE.js $FILE_A $FILE_B > results/nodejs-$SIZE-mode-$i$SUFFIX
+        endTimer
+        echo ""
+    done
 
-################################################################################
+else
+    echo "> ERROR: NodeJs is not installed!"
+    echo ""
+fi
 
 ################################################################################
 
