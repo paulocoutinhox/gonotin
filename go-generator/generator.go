@@ -20,6 +20,9 @@ func random(min, max int) int {
 }
 
 func main() {
+	// version 1 : Paulo Coutinho
+	// version 2 : Michael Jones (go-nuts)
+
 	if len(os.Args) != 4 {
 		usage()
 	}
