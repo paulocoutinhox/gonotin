@@ -11,7 +11,7 @@ import (
 )
 
 func usage() {
-	fmt.Printf("usage: generate filename count max\n")
+	fmt.Printf("> usage: generator filename count max\n")
 	os.Exit(1)
 }
 
@@ -48,5 +48,5 @@ func main() {
 	buffer.Flush()
 	file.Close()
 
-	fmt.Printf("wrote %d numbers in (0 ≤ n < %d) to file %q\n", count, max, filename)
+	fmt.Printf("> wrote %d numbers in (0 ≤ n < %d) to file %q\n", count, max, filename)
 }
