@@ -11,6 +11,15 @@ This simple scripts compare file A and file B and shows line that not exists in 
 ./run.sh large
 ```
 
+# Automated running sending results to RESULTS.md file
+
+    SYNTAX: 
+    ./run-with-results.sh [file size - small, medium or large]
+
+```
+./run-with-results.sh large
+```
+
 # Running Go version 
 
     SYNTAX: 
