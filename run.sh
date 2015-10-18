@@ -2,12 +2,15 @@
 
 ################################################################################
 
+echo ""
+
 # variables
 GO_INSTALLED=0
 CPP_INSTALLED=0
 PYTHON_INSTALLED=0
 PHP_INSTALLED=0
 NODEJS_INSTALLED=0
+TEMP_FOLDER=temp
 
 # functions
 startTimer() {
@@ -76,10 +79,23 @@ checkNodeJsInstalled
 
 ################################################################################
 
+echo "> Removing old temporary files..."
+rm -rf temp
+mkdir temp
+echo ""
+
+################################################################################
+
 if [ $GO_INSTALLED -eq 1 ]; then
-    echo "> Compiling Go file..."
-    rm -rf go-version/gonotin
-    go build -o go-version/gonotin go-version/gonotin.go
+    echo "> Compiling Go files..."
+
+    for i in `seq 1 3`; do
+        echo "> Compiling file $i..."
+
+        rm -rf $TEMP_FOLDER/go-gonotin-$i
+        go build -o $TEMP_FOLDER/go-gonotin-$i go-version/gonotin$i.go
+    done
+
     echo ""
 else
     echo "> ERROR: Go is not installed!"
@@ -89,36 +105,26 @@ fi
 ################################################################################
 
 if [ $CPP_INSTALLED -eq 1 ]; then
-    echo "> Compiling C++ file..."
+    echo "> Compiling C++ files..."
 
-    rm -rf cpp-version/gonotin
-    rm -rf cpp-version/build
+    for i in `seq 1 3`; do
+        echo "> Compiling file $i..."
 
-    # OSX/*nix compiling method
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        clang++ -g cpp-version/gonotin.cpp -o cpp-version/gonotin -lm -std=c++11
-    else
-        g++ -g -pthread cpp-version/gonotin.cpp -o cpp-version/gonotin -lm -std=c++11
-    fi
+        rm -rf $TEMP_FOLDER/cpp-gonotin-$i
 
-    # Cross-Platform compiling method
-    #cmake -Bcpp-version/build/ -Hcpp-version/
-    #make -C cpp-version/build/
-    #mv cpp-version/build/gonotin cpp-version/
-    #rm -rf cpp-version/build
+        # OSX and Linux compiling method
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+            clang++ -g cpp-version/gonotin$i.cpp -o $TEMP_FOLDER/cpp-gonotin-$i -lm -std=c++11
+        else
+            g++ -g -pthread cpp-version/gonotin$i.cpp -o $TEMP_FOLDER/cpp-gonotin-$i -lm -std=c++11
+        fi
+    done
 
     echo ""
 else
     echo "> ERROR: C++ is not installed!"
     echo ""
 fi
-
-################################################################################
-
-echo "> Removing old results..."
-rm -rf results
-mkdir results
-echo ""
 
 ################################################################################
 
@@ -134,26 +140,11 @@ echo ""
 
 ################################################################################
 
-if [ $CPP_INSTALLED -eq 1 ]; then
-    for i in `seq 1 5`; do
-        echo "> Executing C++ (mode = $i, size = $SIZE) version..."
-        startTimer
-        cpp-version/$EXECUTABLE $FILE_A $FILE_B $i > results/cpp-$SIZE-mode-$i$SUFFIX
-        endTimer
-        echo ""
-    done
-else
-    echo "> ERROR: G++ is not installed!"
-    echo ""
-fi
-
-################################################################################
-
 if [ $GO_INSTALLED -eq 1 ]; then
-    for i in `seq 1 7`; do
+    for i in `seq 1 3`; do
         echo "> Executing Go (mode = $i, size = $SIZE) version..."
         startTimer
-        go-version/$EXECUTABLE $FILE_A $FILE_B $i > results/go-$SIZE-mode-$i$SUFFIX
+        $TEMP_FOLDER/go-$EXECUTABLE-$i $FILE_A $FILE_B $i > $TEMP_FOLDER/go-$SIZE-mode-$i$SUFFIX
         endTimer
         echo ""
     done
@@ -164,11 +155,26 @@ fi
 
 ################################################################################
 
+if [ $CPP_INSTALLED -eq 1 ]; then
+    for i in `seq 1 3`; do
+        echo "> Executing C++ (mode = $i, size = $SIZE) version..."
+        startTimer
+        $TEMP_FOLDER/cpp-$EXECUTABLE-$i $FILE_A $FILE_B $i > $TEMP_FOLDER/cpp-$SIZE-mode-$i$SUFFIX
+        endTimer
+        echo ""
+    done
+else
+    echo "> ERROR: G++ is not installed!"
+    echo ""
+fi
+
+################################################################################
+
 if [ $PYTHON_INSTALLED -eq 1 ]; then
-    for i in `seq 1 4`; do
+    for i in `seq 1 3`; do
         echo "> Executing Python (mode = $i, size = $SIZE) version..."
         startTimer
-        MODE=$i python python-version/$EXECUTABLE.py $FILE_A $FILE_B > results/python-$SIZE-mode-$i$SUFFIX
+        MODE=$i python python-version/$EXECUTABLE$i.py $FILE_A $FILE_B > $TEMP_FOLDER/python-$SIZE-mode-$i$SUFFIX
         endTimer
         echo ""
     done
@@ -179,34 +185,34 @@ fi
 
 ################################################################################
 
-if [ $PHP_INSTALLED -eq 1 ]; then
-    for i in `seq 1 2`; do
-        echo "> Executing PHP (mode = $i, size = $SIZE) version..."
-        startTimer
-        php php-version/$EXECUTABLE.php $FILE_A $FILE_B $i > results/php-$SIZE-mode-$i$SUFFIX
-        endTimer
-        echo ""
-    done
-else
-    echo "> ERROR: Php is not installed!"
-    echo ""
-fi
+#if [ $PHP_INSTALLED -eq 1 ]; then
+#    for i in `seq 1 2`; do
+#        echo "> Executing PHP (mode = $i, size = $SIZE) version..."
+#        startTimer
+#        php php-version/$EXECUTABLE$i.php $FILE_A $FILE_B $i > $TEMP_FOLDER/php-$SIZE-mode-$i$SUFFIX
+#        endTimer
+#        echo ""
+#    done
+#else
+#    echo "> ERROR: Php is not installed!"
+#    echo ""
+#fi
 
 ################################################################################
 
-if [ $NODEJS_INSTALLED -eq 1 ]; then
-    for i in `seq 1 1`; do
-        echo "> Executing Node (mode = $i, size = $SIZE) version..."
-        startTimer
-        node nodejs-version/$EXECUTABLE.js $FILE_A $FILE_B > results/nodejs-$SIZE-mode-$i$SUFFIX
-        endTimer
-        echo ""
-    done
-
-else
-    echo "> ERROR: NodeJs is not installed!"
-    echo ""
-fi
+#if [ $NODEJS_INSTALLED -eq 1 ]; then
+#    for i in `seq 1 1`; do
+#        echo "> Executing Node (mode = $i, size = $SIZE) version..."
+#        startTimer
+#        node nodejs-version/$EXECUTABLE$i.js $FILE_A $FILE_B > $TEMP_FOLDER/nodejs-$SIZE-mode-$i$SUFFIX
+#        endTimer
+#        echo ""
+#    done
+#
+#else
+#    echo "> ERROR: NodeJs is not installed!"
+#    echo ""
+#fi
 
 ################################################################################
 

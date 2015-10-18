@@ -7,8 +7,4 @@ $RECYCLE.BIN/
 *.iml
 *.idea
 go-generator/generator
-go-version/gonotin
-cpp-version/gonotin.dSYM
-cpp-version/build
-cpp-version/gonotin
-results/
+temp/
