@@ -11,6 +11,8 @@ rm -rf RESULTS.md
 
 ################################################################################
 
+echo "> Executing main script..."
+
 MARKDOWN_CODE='```'
 
 echo "$MARKDOWN_CODE" >> RESULTS.md

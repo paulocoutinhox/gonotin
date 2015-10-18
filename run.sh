@@ -124,9 +124,9 @@ if [ $CPP_INSTALLED -eq 1 ]; then
 
         # OSX and Linux compiling method
         if [[ "$OSTYPE" == "darwin"* ]]; then
-            clang++ -g cpp-version/gonotin$i.cpp -o $TEMP_FOLDER/cpp-gonotin-$i -lm -std=c++11
+            clang++ -g cpp-version/gonotin$i.cpp -o $TEMP_FOLDER/cpp-gonotin-$i -lm -std=c++11 -O2
         else
-            g++ -g -pthread cpp-version/gonotin$i.cpp -o $TEMP_FOLDER/cpp-gonotin-$i -lm -std=c++11
+            g++ -g -pthread cpp-version/gonotin$i.cpp -o $TEMP_FOLDER/cpp-gonotin-$i -lm -std=c++11 -O2
         fi
     done
 

@@ -16,43 +16,43 @@
 > Processing large files...
 
 > Executing Go (mode = 1, size = large) version...
-> Execution time: 3.074257 seconds
+> Execution time: 3.738433 seconds
 
 
 > Executing Go (mode = 2, size = large) version...
-> Execution time: 1.342693 seconds
+> Execution time: 1.622709 seconds
 
 
 > Executing Go (mode = 3, size = large) version...
-> Execution time: 0.863548 seconds
+> Execution time: 0.954259 seconds
 
 
 > Executing Go (mode = 4, size = large) version...
-> Execution time: 0.842967 seconds
+> Execution time: 0.964747 seconds
 
 
 > Executing C++ (mode = 1, size = large) version...
-> Execution time: 8.393439 seconds
+> Execution time: 3.586571 seconds
 
 
 > Executing C++ (mode = 2, size = large) version...
-> Execution time: 3.633739 seconds
+> Execution time: 2.316029 seconds
 
 
 > Executing C++ (mode = 3, size = large) version...
-> Execution time: 2.256895 seconds
+> Execution time: 1.457209 seconds
 
 
 > Executing Python (mode = 1, size = large) version...
-> Execution time: 1.678350 seconds
+> Execution time: 1.893265 seconds
 
 
 > Executing Python (mode = 2, size = large) version...
-> Execution time: 1.400996 seconds
+> Execution time: 1.344932 seconds
 
 
 > Executing Python (mode = 3, size = large) version...
-> Execution time: 1.545350 seconds
+> Execution time: 1.603289 seconds
 
 
 > Finished!
