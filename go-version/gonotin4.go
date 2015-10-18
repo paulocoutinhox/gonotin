@@ -13,10 +13,6 @@ import (
 )
 
 func main() {
-	mode8string()
-}
-
-func mode8string() {
 	var wg sync.WaitGroup
 	wg.Add(2)
 
