@@ -7,4 +7,4 @@ $RECYCLE.BIN/
 *.iml
 *.idea
 go-generator/generator
-temp/
+temp
