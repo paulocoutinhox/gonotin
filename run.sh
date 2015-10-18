@@ -79,6 +79,16 @@ checkNodeJsInstalled
 
 ################################################################################
 
+# get total of files
+
+totalFilesGo=$(find go-version/*.go -maxdepth 1 -type f | wc -l)
+totalFilesCpp=$(find cpp-version/*.cpp -maxdepth 1 -type f | wc -l)
+totalFilesPython=$(find python-version/*.py -maxdepth 1 -type f | wc -l)
+#totalFilesPhp=$(find php-version/*.php -maxdepth 1 -type f | wc -l)
+#totalFilesNodeJs=$(find nodejs-version/*.js -maxdepth 1 -type f | wc -l)
+
+################################################################################
+
 echo "> Removing old temporary files..."
 rm -rf temp
 mkdir temp
@@ -89,7 +99,7 @@ echo ""
 if [ $GO_INSTALLED -eq 1 ]; then
     echo "> Compiling Go files..."
 
-    for i in `seq 1 4`; do
+    for i in `seq 1 $totalFilesGo`; do
         echo "> Compiling file $i..."
 
         rm -rf $TEMP_FOLDER/go-gonotin-$i
@@ -107,7 +117,7 @@ fi
 if [ $CPP_INSTALLED -eq 1 ]; then
     echo "> Compiling C++ files..."
 
-    for i in `seq 1 3`; do
+    for i in `seq 1 $totalFilesCpp`; do
         echo "> Compiling file $i..."
 
         rm -rf $TEMP_FOLDER/cpp-gonotin-$i
@@ -141,7 +151,7 @@ echo ""
 ################################################################################
 
 if [ $GO_INSTALLED -eq 1 ]; then
-    for i in `seq 1 4`; do
+    for i in `seq 1 $totalFilesGo`; do
         echo "> Executing Go (mode = $i, size = $SIZE) version..."
         startTimer
         $TEMP_FOLDER/go-$EXECUTABLE-$i $FILE_A $FILE_B $i > $TEMP_FOLDER/go-$SIZE-mode-$i$SUFFIX
@@ -156,7 +166,7 @@ fi
 ################################################################################
 
 if [ $CPP_INSTALLED -eq 1 ]; then
-    for i in `seq 1 3`; do
+    for i in `seq 1 $totalFilesCpp`; do
         echo "> Executing C++ (mode = $i, size = $SIZE) version..."
         startTimer
         $TEMP_FOLDER/cpp-$EXECUTABLE-$i $FILE_A $FILE_B $i > $TEMP_FOLDER/cpp-$SIZE-mode-$i$SUFFIX
@@ -171,7 +181,7 @@ fi
 ################################################################################
 
 if [ $PYTHON_INSTALLED -eq 1 ]; then
-    for i in `seq 1 3`; do
+    for i in `seq 1 $totalFilesPython`; do
         echo "> Executing Python (mode = $i, size = $SIZE) version..."
         startTimer
         MODE=$i python python-version/$EXECUTABLE$i.py $FILE_A $FILE_B > $TEMP_FOLDER/python-$SIZE-mode-$i$SUFFIX
@@ -186,7 +196,7 @@ fi
 ################################################################################
 
 #if [ $PHP_INSTALLED -eq 1 ]; then
-#    for i in `seq 1 2`; do
+#    for i in `seq 1 $totalFilesPhp`; do
 #        echo "> Executing PHP (mode = $i, size = $SIZE) version..."
 #        startTimer
 #        php php-version/$EXECUTABLE$i.php $FILE_A $FILE_B $i > $TEMP_FOLDER/php-$SIZE-mode-$i$SUFFIX
@@ -201,7 +211,7 @@ fi
 ################################################################################
 
 #if [ $NODEJS_INSTALLED -eq 1 ]; then
-#    for i in `seq 1 1`; do
+#    for i in `seq 1 $totalFilesNodeJs`; do
 #        echo "> Executing Node (mode = $i, size = $SIZE) version..."
 #        startTimer
 #        node nodejs-version/$EXECUTABLE$i.js $FILE_A $FILE_B > $TEMP_FOLDER/nodejs-$SIZE-mode-$i$SUFFIX
