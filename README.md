@@ -14,10 +14,10 @@ This simple scripts compare file A and file B and shows line that not exists in 
 # Running Go version 
 
     SYNTAX: 
-    go run go-version/gonotin.go [file A] [file B] [mode]  
+    go run go-version/gonotin[version].go [file A] [file B]  
 
 ```
-go run go-version/gonotin.go data/fileA-large.txt data/fileB-large.txt 1
+go run go-version/gonotin1.go data/fileA-large.txt data/fileB-large.txt
 ```
 
 
@@ -25,53 +25,61 @@ go run go-version/gonotin.go data/fileA-large.txt data/fileB-large.txt 1
     for better performance (our benchmark use it):
 
 ```
-go build -o go-version/gonotin go-version/gonotin.go
-./go-version/gonotin data/fileA-large.txt data/fileB-large.txt 1
+mkdir -p temp
+go build -o temp/go-gonotin-1 go-version/gonotin1.go
+./temp/go-gonotin-1 data/fileA-large.txt data/fileB-large.txt
 ```    
 
-# Running PHP version 
+# Running PHP version (removed until a correct code)
 
     SYNTAX: 
-    php php-version/gonotin.php [file A] [file B] [mode] 
+    php php-version/gonotin[version].php [file A] [file B] 
 
 ```
-php php-version/gonotin.php data/fileA-large.txt data/fileB-large.txt 1
+php php-version/gonotin1.php data/fileA-large.txt data/fileB-large.txt
 ```
 
 # Running Python version
 
     SYNTAX: 
-    MODE=[mode] python python-version/gonotin.py [file A] [file B] 
+    python python-version/gonotin[version].py [file A] [file B] 
 
 ```
-MODE=1 python python-version/gonotin.py data/fileA-large.txt data/fileB-large.txt
+python python-version/gonotin1.py data/fileA-large.txt data/fileB-large.txt
 ```
 
-# Running NodeJS version
+# Running NodeJS version (removed until a correct code)
 
     SYNTAX: 
-    node nodejs-version/gonotin.js [file A] [file B] [mode] 
+    node nodejs-version/gonotin[version].js [file A] [file B] 
 
 ```
-node nodejs-version/gonotin.js data/fileA-large.txt data/fileB-large.txt 1
+node nodejs-version/gonotin1.js data/fileA-large.txt data/fileB-large.txt
 ```
 
 # Running C++ version
 
-    BUILDING:
+    BUILDING FOR OSX:
     
 ```
-cmake -Bcpp-version/build/ -Hcpp-version/
-make -C cpp-version/build/
-mv cpp-version/build/gonotin cpp-version/
-rm -rf cpp-version/build
+mkdir -p temp
+clang++ -g cpp-version/gonotin[version].cpp -o temp/cpp-gonotin-[version] -lm -std=c++11
 ```
+
+
+    BUILDING FOR LINUX:
+    
+```
+mkdir -p temp
+g++ -g -pthread cpp-version/gonotin[version].cpp -o temp/cpp-gonotin-[version] -lm -std=c++11
+```
+
 
     SYNTAX: 
-    ./cpp-version/gonotin [file A] [file B] [mode] 
+    ./temp/cpp-gonotin-[version] [file A] [file B]
 
 ```
-./cpp-version/gonotin data/fileA-large.txt data/fileB-large.txt 1
+./temp/cpp-gonotin-1 data/fileA-large.txt data/fileB-large.txt
 ```
 
 # Running options
@@ -87,7 +95,7 @@ time go run go-version/gonotin.go data/fileA-large.txt data/fileB-large.txt 1
     You can send results to a file. Every command on benchmark use it.
 
 ```
-time go run go-version/gonotin.go data/fileA-large.txt data/fileB-large.txt 1 > results.txt
+time go run go-version/gonotin1.go data/fileA-large.txt data/fileB-large.txt > results.txt
 ```
 
 # Running the sample file generator
