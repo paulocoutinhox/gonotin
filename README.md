@@ -72,7 +72,7 @@ node nodejs-version/gonotin1.js data/fileA-large.txt data/fileB-large.txt
     
 ```
 mkdir -p temp
-clang++ -g cpp-version/gonotin[version].cpp -o temp/cpp-gonotin-[version] -lm -std=c++11
+clang++ -g cpp-version/gonotin[version].cpp -o temp/cpp-gonotin-[version] -lm -std=c++11 -O2
 ```
 
 
@@ -80,7 +80,7 @@ clang++ -g cpp-version/gonotin[version].cpp -o temp/cpp-gonotin-[version] -lm -s
     
 ```
 mkdir -p temp
-g++ -g -pthread cpp-version/gonotin[version].cpp -o temp/cpp-gonotin-[version] -lm -std=c++11
+g++ -g -pthread cpp-version/gonotin[version].cpp -o temp/cpp-gonotin-[version] -lm -std=c++11 -O2
 ```
 
 
