@@ -89,7 +89,7 @@ echo ""
 if [ $GO_INSTALLED -eq 1 ]; then
     echo "> Compiling Go files..."
 
-    for i in `seq 1 3`; do
+    for i in `seq 1 4`; do
         echo "> Compiling file $i..."
 
         rm -rf $TEMP_FOLDER/go-gonotin-$i
@@ -141,7 +141,7 @@ echo ""
 ################################################################################
 
 if [ $GO_INSTALLED -eq 1 ]; then
-    for i in `seq 1 3`; do
+    for i in `seq 1 4`; do
         echo "> Executing Go (mode = $i, size = $SIZE) version..."
         startTimer
         $TEMP_FOLDER/go-$EXECUTABLE-$i $FILE_A $FILE_B $i > $TEMP_FOLDER/go-$SIZE-mode-$i$SUFFIX

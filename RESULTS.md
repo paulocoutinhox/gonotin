@@ -1,10 +1,11 @@
 ```
-> Removing old temporary files...
+>Removing old temporary files...
 
 > Compiling Go files...
 > Compiling file 1...
 > Compiling file 2...
 > Compiling file 3...
+> Compiling file 4...
 
 > Compiling C++ files...
 > Compiling file 1...
@@ -14,41 +15,44 @@
 > Processing large files...
 
 > Executing Go (mode = 1, size = large) version...
-> Execution time: 3.250333 seconds
+> Execution time: 3.203941 seconds
 
 
 > Executing Go (mode = 2, size = large) version...
-> Execution time: 1.393913 seconds
+> Execution time: 1.446177 seconds
 
 
 > Executing Go (mode = 3, size = large) version...
-> Execution time: 0.896780 seconds
+> Execution time: 0.841429 seconds
+
+
+> Executing Go (mode = 4, size = large) version...
+> Execution time: 0.837002 seconds
 
 
 > Executing C++ (mode = 1, size = large) version...
-> Execution time: 8.814639 seconds
+> Execution time: 8.503273 seconds
 
 
 > Executing C++ (mode = 2, size = large) version...
-> Execution time: 3.476819 seconds
+> Execution time: 3.480670 seconds
 
 
 > Executing C++ (mode = 3, size = large) version...
-> Execution time: 2.352295 seconds
+> Execution time: 2.321269 seconds
 
 
 > Executing Python (mode = 1, size = large) version...
-> Execution time: 1.669208 seconds
+> Execution time: 1.698799 seconds
 
 
 > Executing Python (mode = 2, size = large) version...
-> Execution time: 1.406134 seconds
+> Execution time: 1.315771 seconds
 
 
 > Executing Python (mode = 3, size = large) version...
-> Execution time: 1.590369 seconds
+> Execution time: 1.592322 seconds
 
 
 > Finished!
 ```
-
