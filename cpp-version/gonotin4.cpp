@@ -1,6 +1,6 @@
 /*
 AUTHOR: PAULO COUTINHO
-DESCRIPTION: Using std::async
+DESCRIPTION: Using std::threads
 */
 
 #include <iostream>
@@ -10,14 +10,15 @@ DESCRIPTION: Using std::async
 #include <set>
 #include <unordered_set>
 #include <thread>
-#include <future>
 
 using namespace std;
 
-std::unordered_set<string> reader(char *file)
-{
-    std::unordered_set<string> data;
+// general
+std::unordered_set<string> dataA;
+std::unordered_set<string> dataB;
 
+void readerA(char *file)
+{
     ifstream stream;
     stream.open(file);
 
@@ -25,22 +26,36 @@ std::unordered_set<string> reader(char *file)
     {
         string line;
         stream >> line;
-        data.insert(line);
+        dataA.insert(line);
     }
 
     stream.close();
-    return data;
+}
+
+void readerB(char *file)
+{
+    ifstream stream;
+    stream.open(file);
+
+    while(!stream.eof())
+    {
+        string line;
+        stream >> line;
+        dataB.insert(line);
+    }
+
+    stream.close();
 }
 
 int main(int argc, char *argv[])
 {
-    // generate future async
-    auto futureA = std::async(reader, argv[1]);
-    auto futureB = std::async(reader, argv[2]);
+    // create the threads
+    std::thread t1(readerA, argv[1]);
+    std::thread t2(readerB, argv[2]);
 
-    // get data from future
-    std::unordered_set<string> dataA = futureA.get();
-    std::unordered_set<string> dataB = futureB.get();
+    // wait for threads finish
+    t1.join();
+    t2.join();
 
     // process data
     for(string value : dataA)
@@ -52,4 +67,6 @@ int main(int argc, char *argv[])
             printf("%s\n", value.c_str());
         }
     }
+
+    return 0;
 }

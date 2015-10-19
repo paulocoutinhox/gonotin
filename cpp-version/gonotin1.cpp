@@ -1,5 +1,6 @@
 /*
 AUTHOR: PAULO COUTINHO
+DESCRIPTION: Using std::set
 */
 
 #include <iostream>
@@ -7,9 +8,6 @@ AUTHOR: PAULO COUTINHO
 #include <vector>
 #include <algorithm>
 #include <set>
-#include <unordered_set>
-#include <thread>
-#include <future>
 
 using namespace std;
 

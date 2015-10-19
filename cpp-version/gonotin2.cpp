@@ -8,8 +8,6 @@ AUTHOR: 0xe2.0x9a.0x9b (GONUTS)
 #include <algorithm>
 #include <set>
 #include <unordered_set>
-#include <thread>
-#include <future>
 
 using namespace std;
 
