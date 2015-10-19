@@ -73,6 +73,7 @@ func main() {
 			w.WriteString(v)
 			w.WriteByte('\n')
 		}
+                reference[v] = struct{}{}
 	}
 	w.Flush()
 }
