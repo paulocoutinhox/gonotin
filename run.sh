@@ -50,8 +50,13 @@ checkCppInstalled() {
 }
 
 checkPythonInstalled() {
-    if [ -x "$(command -v python)" ]; then
+    if [ -x "$(command -v python2)" ]; then
         PYTHON_INSTALLED=1
+        python() { python2 "$@"; }
+    else
+        if [ -x "$(command -v python)" ]; then
+            PYTHON_INSTALLED=1
+        fi
     fi
 }
 

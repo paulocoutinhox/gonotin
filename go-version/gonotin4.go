@@ -72,8 +72,8 @@ func main() {
 		if !exists {
 			w.WriteString(v)
 			w.WriteByte('\n')
+			reference[v] = struct{}{}
 		}
-                reference[v] = struct{}{}
 	}
 	w.Flush()
 }
