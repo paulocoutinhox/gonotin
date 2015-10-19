@@ -7,6 +7,7 @@ DESCRIPTION: Using channel
 
 import (
 	"bufio"
+	"fmt"
 	"log"
 	"os"
 )
@@ -27,23 +28,34 @@ func (n number) String() string {
 	return string(buf[i:])
 }
 
+type ErrNumberTooLong string
+
+func (e ErrNumberTooLong) Error() string {
+	return fmt.Sprintf("Number too long: %q", string(e))
+}
+
+type ErrNumberSyntax string
+
+func (e ErrNumberSyntax) Error() string { return fmt.Sprintf("Invalid number: %q", string(e)) }
+
 const maxnumber = ^number(0)
 
-func NewNumber(s string) number {
+func ParseNumber(s string) (number, error) {
 	var n number
 	for _, d := range s {
 		switch {
-		case n > maxnumber/10-9:
-			log.Fatalln("number is too long")
 		case '0' <= d && d <= '9':
+			if n > (maxnumber-9)/10 {
+				return 0, ErrNumberTooLong(s)
+			}
 			n = 10*n + number(d-'0')
 		case d == '(' || d == ')' || d == '+' || d == '-':
 			// ignore
 		default:
-			log.Fatalln("string is not a number:", s)
+			return 0, ErrNumberSyntax(s)
 		}
 	}
-	return n
+	return n, nil
 }
 
 type numbers map[number]struct{}
@@ -66,7 +78,11 @@ func processFile(name string, c chan<- number) {
 	s := bufio.NewScanner(f)
 	s.Split(bufio.ScanLines)
 	for s.Scan() {
-		c <- NewNumber(s.Text())
+		if n, err := ParseNumber(s.Text()); err != nil {
+			log.Fatal(err)
+		} else {
+			c <- n
+		}
 	}
 	if err := s.Err(); err != nil {
 		log.Fatalln(err)
