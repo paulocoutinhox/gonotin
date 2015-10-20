@@ -28,7 +28,7 @@ endTimer() {
         dur=$(echo "$(date +%s.%N) - $start" | bc);
     fi
 
-    printf "> Execution time: %.6f seconds\n\n" $dur
+    LC_NUMERIC=C printf "> Execution time: %.6f seconds\n\n" $dur
 }
 
 checkGoInstalled() {
