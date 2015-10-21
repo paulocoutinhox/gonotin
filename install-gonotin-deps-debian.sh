@@ -2,8 +2,12 @@ echo "> Updating packages..."
 apt-get update
 echo ""
 
-echo "> Installing C++..."
+echo "> Installing general packages..."
 apt-get install build-essential
+apt-get install bc
+echo ""
+
+echo "> Installing C++..."
 apt-get install g++-4.8
 update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 50
 echo ""
