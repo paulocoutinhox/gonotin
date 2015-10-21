@@ -127,7 +127,7 @@ brew install coreutils
 
 # Benchmark results
 
-Check file [RESULTS.md](RESULTS.md)
+Check file [RESULTS.md](RESULTS.md) for a benchmark using a Raspberry Pi B (512mb)
 
 # Author WebSite
 
