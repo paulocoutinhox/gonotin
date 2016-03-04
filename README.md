@@ -1,3 +1,6 @@
+# Support with donation
+[![Support with donation](http://donation.pcoutinho.com/images/donate-button.png)](http://donation.pcoutinho.com/)
+
 # gonotin (Go Not In)
 
 This simple scripts compare file A and file B and shows line that not exists in file B, but exists in file A.
